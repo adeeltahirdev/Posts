@@ -7,7 +7,11 @@ function Posts() {
     const [search, setSearch] = useState('')
 
     const filteredPosts = posts.filter((post) => {
-        
+        const searchTerm = search.toLowerCase()
+        const postTitle = post.title.toLowerCase()
+        const postBody = post.body.toLowerCase()
+
+        return postTitle.includes(searchTerm) || postBody.includes(searchTerm)
     })
 
     useEffect(() => {
@@ -21,8 +25,8 @@ function Posts() {
         <div className="container">
             <h1>Posts</h1>
 
-            <input className="search" type="search" placeholder="Search posts..." value={search} onChange={(event) => setSearch(event.target,value)} />
-                {posts.map((post) => (
+            <input className="search" type="text" placeholder="Search posts..." value={search} onChange={(event) => setSearch(event.target.value)} />
+                {filteredPosts.map((post) => (
                     <PostCard key={post.id}  post={post}/>
                 ))}
         </div>

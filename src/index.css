@@ -41,3 +41,18 @@ button:active {
   border: 1px solid #333;
   outline: none;
 }
+
+.pd {
+  padding: 20px;
+}
+
+.pd p {
+  font-size: 1.5rem;
+  margin-bottom: 50px;
+}
+
+.pd-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}

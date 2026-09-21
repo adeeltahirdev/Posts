@@ -4,11 +4,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import Posts from './Posts.jsx'
+import PostDetail from './PostDetail.jsx'
 import NotFound from './NotFound.jsx'
 
 const router = createBrowserRouter([
   {path:'/', element: <App />},
   {path:'/posts', element: <Posts />},
+  {path:'/posts/:id', element: <PostDetail />},
   {path:'*', element:<NotFound />},
 ])
 

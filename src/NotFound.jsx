@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function NotFound() {
     return(
-        <div>
+        <div className="container">
             <h1>This Page does not exist!</h1>
             <Link to={'/'}>
                 <button>Go Back Home</button>

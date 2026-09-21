@@ -5,17 +5,25 @@ function PostDetail() {
     const {id} = useParams()
 
     const [post, setPost] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
         .then((response) => response.json())
-        .then((data) => setPost(data))
-        .catch((error) => console.log('error fetching the Post: ', error))
+        .then((data) => {
+            setPost(data)
+            setLoading(false)
+        })
+        .catch((error) => {
+            console.log('error fetching the Post: ', error)
+            setLoading(false)
+        })
     }, [id])
 
 
     return(
-        <div className="pd">
+        loading ? (<div className="loader"></div>) :
+        (<div className="pd">
             {post && (
                 <>
                     <h1>{post.title}</h1>
@@ -30,7 +38,7 @@ function PostDetail() {
                     </div>
                 </>
             )}
-        </div>
+        </div>)
     );
 }
 

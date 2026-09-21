@@ -56,3 +56,18 @@ button:active {
   align-items: center;
   justify-content: space-evenly;
 }
+
+.loader {
+  margin: 50px auto;
+  border: 13px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 75px;
+  height: 75px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

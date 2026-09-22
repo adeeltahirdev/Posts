@@ -32,6 +32,9 @@ function PostDetail() {
                         <Link to={'/posts'}>
                         <button className="back-btn">Back</button>
                         </Link>
+                        <Link to={`/posts/${id}/update`}>
+                        <button className="back-btn">Edit</button>
+                        </Link>
                         <Link to={'/'}>
                         <button className="home-btn">Home</button>
                         </Link>

@@ -58,6 +58,10 @@ button:active {
   justify-content: space-evenly;
 }
 
+.pd-btn button {
+  font-size: 1rem;
+}
+
 .loader {
   margin: 50px auto;
   border: 13px solid #f3f3f3;
@@ -118,4 +122,8 @@ button:active {
 
 .update-btn {
   margin-left: 10px;
+}
+
+.edit-page {
+  padding: 20px;
 }

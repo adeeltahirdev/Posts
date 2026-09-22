@@ -7,11 +7,17 @@ function CreatePost() {
     const [body, setBody] = useState('')
 
     const [submitting, setSubmitting] = useState(false)
+    const [error, setError] = useState(null)
 
     const navigate = useNavigate()
     
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        if (title.trim() === '' || body.trim() === '') {
+            setError('Title and Body are required')
+            return
+        }
 
         setSubmitting(true)
 
@@ -26,11 +32,20 @@ function CreatePost() {
                 userId: 1
             })
         })
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to create the post')
+            }
+            return response.json()
+        })
         .then((data) => {
             console.log(data)
             setSubmitting(false)
             navigate('/posts')
+        })
+        .catch(() => {
+            setError('Failed to create the post')
+            setSubmitting(false)
         })
     }
  
@@ -43,6 +58,7 @@ function CreatePost() {
                     <input className="title" type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
                     <label className="label">Post Body:</label>
                     <textarea className="text-area" value={body} onChange={(event) => setBody(event.target.value)}></textarea>
+                    {error && <p>{error}</p>}
                     <button className="submit-btn" type="submit" disabled={submitting}>
                         {submitting ? 'Creating...' : 'Submit'}
                     </button>

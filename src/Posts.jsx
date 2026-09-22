@@ -8,6 +8,7 @@ function Posts() {
     const [search, setSearch] = useState('')
 
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     const filteredPosts = posts.filter((post) => {
         const searchTerm = search.toLowerCase()
@@ -19,12 +20,20 @@ function Posts() {
 
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/posts')
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch the posts')
+            }
+            return response.json()
+        })
         .then((data) => {
             setPosts(data)
             setLoading(false)
         })
-        .catch((error) => console.error('Error fetching Posts: ', error))
+        .catch(() => {
+            setError('Error fetching posts')
+            setLoading(false)
+        })
     }, [])
 
     return(
@@ -36,12 +45,16 @@ function Posts() {
                 </Link>
                 <input className="search" type="text" placeholder="Search posts..." value={search} onChange={(event) => setSearch(event.target.value)} />
             </div>
-                {loading ? (<div className="loader"></div>) : (
+                {loading ? (<div className="loader"></div>) : error ? (
+                    <p>{error}</p>
+                ) : filteredPosts.length > 0 ? (
                     <>
                         {filteredPosts.map((post) => (
                         <PostCard key={post.id}  post={post}/>
                 ))}
                 </>
+                ) : (
+                    <p>No posts found</p>
                 )}
         </div>
     );

@@ -6,18 +6,24 @@ function PostDetail() {
 
     const [post, setPost] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
     const navigate = useNavigate()
 
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch post')
+            }
+            return response.json()
+        })
         .then((data) => {
             setPost(data)
             setLoading(false)
         })
-        .catch((error) => {
-            console.log('error fetching the Post: ', error)
+        .catch(() => {
+            setError('Error fetching post')
             setLoading(false)
         })
     }, [id])
@@ -33,12 +39,21 @@ function PostDetail() {
             if (response.ok) {
                 navigate('/posts')
             }
+            else {
+                setError('Post could not be deleted')
+            }
+        })
+        
+        .catch(() => {
+            setError('Failed to delete the post')
         })
     }
 
 
     return(
-        loading ? (<div className="loader"></div>) :
+        loading ? (<div className="loader"></div>) : error ? (
+            <p>{error}</p>
+        ) :
         (<div className="pd">
             {post && (
                 <>

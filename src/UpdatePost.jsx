@@ -9,21 +9,36 @@ function UpdatePost() {
     const [body, setBody] = useState('')
 
     const [submitting, setSubmitting] = useState(false)
+    const [error, setError] = useState(null)
 
     const navigate = useNavigate()
     
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch the post')
+            }
+            return response.json()
+        })
         .then((data) => {
             setTitle(data.title)
             setBody(data.body)
         })
-        .catch((error) => console.log('Error fetching post: ', error))
+        .catch(() => {
+            setError('Failed to fetch the post')
+        })
     }, [id])
 
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        setError(null)
+
+        if (title.trim() === '' || body.trim() === '') {
+            setError('Title and body are required')
+            return
+        }
 
         setSubmitting(true)
 
@@ -38,11 +53,20 @@ function UpdatePost() {
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to update the post')
+            }    
+            return response.json()}
+        )
         .then((data) => {
             console.log(data)
             setSubmitting(false)
             navigate(`/posts/${id}`)
+        })
+        .catch(() => {
+            setError('Failed to update the post')
+            setSubmitting(false)
         })
     }
 
@@ -63,6 +87,7 @@ function UpdatePost() {
                         value={body}
                         onChange={(event) => setBody(event.target.value)}
                     ></textarea>
+                    {error && <p>{error}</p>}
                     <button type="submit" className="update-btn" disabled={submitting}>
                         {submitting ? 'Updating...' : 'Update'}
                     </button>

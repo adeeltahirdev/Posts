@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 
 function PostCard(props) {
 
@@ -12,6 +12,9 @@ function PostCard(props) {
             <p>{post.body}</p>
             <Link to={`/posts/${post.id}`}>
             <button>Read More</button>
+            </Link>
+            <Link to={'/posts/update'}>
+                <button className="update-btn">Update</button>
             </Link>
         </div>
     );

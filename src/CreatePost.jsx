@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { data } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
 
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
+    const navigate = useNavigate()
+    
     const handleSubmit = (event) => {
         event.preventDefault()
 
@@ -21,7 +23,10 @@ function CreatePost() {
             })
         })
         .then((response) => response.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+            console.log(data)
+            navigate('/posts')
+        })
     }
  
     return(

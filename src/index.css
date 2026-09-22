@@ -96,7 +96,8 @@ button:active {
 }
 
 .title {
-  padding: 10px 30px;
+  padding: 10px;
+  width: 240px;
   margin-bottom: 10px;
   margin-top: 5px;
 }
@@ -113,4 +114,8 @@ button:active {
 .submit-btn {
   padding: 20px 40px;
   font-size: 1.3rem;
+}
+
+.update-btn {
+  margin-left: 10px;
 }

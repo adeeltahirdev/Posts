@@ -8,6 +8,8 @@ function PostDetail() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
+    const[deleting, setDeleting] = useState(false)
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -32,6 +34,9 @@ function PostDetail() {
         const confirmed = window.confirm('Are you sure you want to delete this post?')
 
         if (!confirmed) return
+
+        setDeleting(true)
+
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
             method: 'DELETE',
         })
@@ -41,11 +46,13 @@ function PostDetail() {
             }
             else {
                 setError('Post could not be deleted')
+                setDeleting(false)
             }
         })
         
         .catch(() => {
             setError('Failed to delete the post')
+            setDeleting(false)
         })
     }
 
@@ -66,7 +73,9 @@ function PostDetail() {
                         <Link to={`/posts/${id}/update`}>
                         <button className="edit-btn">Edit</button>
                         </Link>
-                        <button className="del-btn" onClick={handleDelete}>Delete</button>
+                        <button className="del-btn" onClick={handleDelete} disabled={deleting}>
+                            {deleting ? 'Deleting...' : 'Delete'}
+                        </button>
                         <Link to={'/'}>
                         <button className="home-btn">Home</button>
                         </Link>

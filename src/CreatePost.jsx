@@ -14,6 +14,8 @@ function CreatePost() {
     const handleSubmit = (event) => {
         event.preventDefault()
 
+        setError(null)
+
         if (title.trim() === '' || body.trim() === '') {
             setError('Title and Body are required')
             return

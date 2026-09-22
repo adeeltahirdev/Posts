@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  box-sizing: border-box;
 }
 
 .container {
@@ -85,12 +86,13 @@ button:active {
 }
 
 .label {
-  text-align: left;
+  align-self: flex-start;
 }
 
 .title, .text-area {
   border: 1px solid #333;
   border-radius: 5px;
+  outline: none;
 }
 
 .title {
@@ -101,11 +103,14 @@ button:active {
 
 .text-area {
   margin-top: 5px;
-  padding: 50px;
+  padding: 10px;
   margin-bottom: 10px;
+  width: 240px;
+  min-height: 120px;
+  resize: vertical;
 }
 
 .submit-btn {
-  padding: 20px 50px;
+  padding: 20px 40px;
   font-size: 1.3rem;
 }

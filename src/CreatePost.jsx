@@ -1,17 +1,43 @@
+import { useState } from "react";
+import { data } from "react-router-dom";
 
-function CreatPost() {
+function CreatePost() {
+
+    const [title, setTitle] = useState('')
+    const [body, setBody] = useState('')
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                title: title,
+                body: body,
+                userId: 1
+            })
+        })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+    }
+ 
     return(
         <div className="container">
             <h1>Create A Post</h1>
-            <div className="post-card">
-                <label className="label">Post title:</label>
-                <input className="title" type="text" />
-                <label className="label">Post Body:</label>
-                <textarea className="text-area"></textarea>
-                <button className="submit-btn" type="submit">Submit</button>
-            </div>
+            <form onSubmit={handleSubmit}>    
+                <div className="post-card">
+                    <label className="label">Post title:</label>
+                    <input className="title" type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
+                    <label className="label">Post Body:</label>
+                    <textarea className="text-area" value={body} onChange={(event) => setBody(event.target.value)}></textarea>
+                    <button className="submit-btn" type="submit">Submit</button>
+                </div>
+            </form>
         </div>
     );
 }
 
-export default CreatPost
+export default CreatePost

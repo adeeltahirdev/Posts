@@ -125,3 +125,11 @@ button:active {
   width: 240px;
   font-size: 1rem;
 }
+
+.edit-btn {
+  background-color: #FFC107;
+}
+
+.del-btn {
+  background-color: #dc3545;
+}

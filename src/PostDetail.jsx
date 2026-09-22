@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 
 function PostDetail() {
     const {id} = useParams()
 
     const [post, setPost] = useState(null)
     const [loading, setLoading] = useState(true)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
@@ -20,6 +22,20 @@ function PostDetail() {
         })
     }, [id])
 
+    const handleDelete = () => {
+        const confirmed = window.confirm('Are you sure you want to delete this post?')
+
+        if (!confirmed) return
+        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+            method: 'DELETE',
+        })
+        .then((response) => {
+            if (response.ok) {
+                navigate('/posts')
+            }
+        })
+    }
+
 
     return(
         loading ? (<div className="loader"></div>) :
@@ -30,11 +46,12 @@ function PostDetail() {
                     <p>{post.body}</p>
                     <div className="pd-btn">
                         <Link to={'/posts'}>
-                        <button className="back-btn">Back</button>
+                        <button className="back-btn">Posts</button>
                         </Link>
                         <Link to={`/posts/${id}/update`}>
-                        <button className="back-btn">Edit</button>
+                        <button className="edit-btn">Edit</button>
                         </Link>
+                        <button className="del-btn" onClick={handleDelete}>Delete</button>
                         <Link to={'/'}>
                         <button className="home-btn">Home</button>
                         </Link>

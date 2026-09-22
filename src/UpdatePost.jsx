@@ -87,7 +87,7 @@ function UpdatePost() {
                         value={body}
                         onChange={(event) => setBody(event.target.value)}
                     ></textarea>
-                    {error && <p>{error}</p>}
+                    {error && <p className="error-message">{error}</p>}
                     <button type="submit" className="update-btn" disabled={submitting}>
                         {submitting ? 'Updating...' : 'Update'}
                     </button>

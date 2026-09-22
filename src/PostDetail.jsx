@@ -59,7 +59,7 @@ function PostDetail() {
 
     return(
         loading ? (<div className="loader"></div>) : error ? (
-            <p>{error}</p>
+            <p className="error-message">{error}</p>
         ) :
         (<div className="pd">
             {post && (

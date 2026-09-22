@@ -60,7 +60,7 @@ function CreatePost() {
                     <input className="title" type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
                     <label className="label">Post Body:</label>
                     <textarea className="text-area" value={body} onChange={(event) => setBody(event.target.value)}></textarea>
-                    {error && <p>{error}</p>}
+                    {error && <p className="error-message">{error}</p>}
                     <button className="submit-btn" type="submit" disabled={submitting}>
                         {submitting ? 'Creating...' : 'Submit'}
                     </button>

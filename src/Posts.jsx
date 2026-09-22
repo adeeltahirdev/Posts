@@ -46,7 +46,7 @@ function Posts() {
                 <input className="search" type="text" placeholder="Search posts..." value={search} onChange={(event) => setSearch(event.target.value)} />
             </div>
                 {loading ? (<div className="loader"></div>) : error ? (
-                    <p>{error}</p>
+                    <p className="error-message">{error}</p>
                 ) : filteredPosts.length > 0 ? (
                     <>
                         {filteredPosts.map((post) => (

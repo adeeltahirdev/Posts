@@ -154,3 +154,13 @@ button:active {
 .crt-btn {
   margin-right: 10px;
 }
+
+.error-message {
+  padding: 10px 15px;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
+  color: #dc3545;
+  background-color: #f8d7da;
+  font-size: 1rem;
+  font-weight: bold;
+}

@@ -71,3 +71,41 @@ button:active {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  transition: 0.3s;
+  width: 300px;
+}
+
+.label {
+  text-align: left;
+}
+
+.title, .text-area {
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+.title {
+  padding: 10px 30px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.text-area {
+  margin-top: 5px;
+  padding: 50px;
+  margin-bottom: 10px;
+}
+
+.submit-btn {
+  padding: 20px 50px;
+  font-size: 1.3rem;
+}

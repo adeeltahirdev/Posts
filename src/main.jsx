@@ -5,12 +5,14 @@ import './index.css'
 import App from './App.jsx'
 import Posts from './Posts.jsx'
 import PostDetail from './PostDetail.jsx'
+import CreatPost from './CreatePost.jsx'
 import NotFound from './NotFound.jsx'
 
 const router = createBrowserRouter([
   {path:'/', element: <App />},
   {path:'/posts', element: <Posts />},
   {path:'/posts/:id', element: <PostDetail />},
+  {path:'/posts/create', element: <CreatPost />},
   {path:'*', element:<NotFound />},
 ])
 

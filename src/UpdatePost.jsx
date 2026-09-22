@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function UpdatePost() {
 
@@ -7,6 +7,8 @@ function UpdatePost() {
 
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+
+    const navigate = useNavigate()
     
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
@@ -33,7 +35,10 @@ function UpdatePost() {
             }
         })
         .then((response) => response.json())
-        .then((json) => console.log(json))
+        .then((data) => {
+            console.log(data)
+            navigate(`/posts/${id}`)
+        })
     }
 
     return(
@@ -53,7 +58,7 @@ function UpdatePost() {
                         value={body}
                         onChange={(event) => setBody(event.target.value)}
                     ></textarea>
-                    <button type="submit" className="submit-btn">Update</button>
+                    <button type="submit" className="update-btn">Update</button>
                 </form>
         </div>
     );

@@ -6,10 +6,14 @@ function CreatePost() {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
+    const [submitting, setSubmitting] = useState(false)
+
     const navigate = useNavigate()
     
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        setSubmitting(true)
 
         fetch('https://jsonplaceholder.typicode.com/posts', {
             method: 'POST',
@@ -25,6 +29,7 @@ function CreatePost() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
+            setSubmitting(false)
             navigate('/posts')
         })
     }
@@ -38,7 +43,9 @@ function CreatePost() {
                     <input className="title" type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
                     <label className="label">Post Body:</label>
                     <textarea className="text-area" value={body} onChange={(event) => setBody(event.target.value)}></textarea>
-                    <button className="submit-btn" type="submit">Submit</button>
+                    <button className="submit-btn" type="submit" disabled={submitting}>
+                        {submitting ? 'Creating...' : 'Submit'}
+                    </button>
                 </div>
             </form>
         </div>

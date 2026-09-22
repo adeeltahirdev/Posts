@@ -116,7 +116,8 @@ button:active {
 }
 
 .submit-btn {
-  padding: 20px 40px;
+  padding: 10px;
+  width: 140px;
   font-size: 1.3rem;
 }
 
@@ -127,9 +128,29 @@ button:active {
 }
 
 .edit-btn {
-  background-color: #FFC107;
+  background-color: hsl(45, 100%, 51%);
+}
+
+.edit-btn:hover {
+  background-color: hsl(45, 100%, 55%);
+}
+
+.edit-btn:active {
+  background-color: hsl(45, 100%, 60%);
 }
 
 .del-btn {
-  background-color: #dc3545;
+  background-color: hsl(354, 70%, 54%);
+}
+
+.del-btn:hover {
+  background-color: hsl(354, 70%, 60%);
+}
+
+.del-btn:active {
+  background-color: hsl(354, 70%, 65%);
+}
+
+.crt-btn {
+  margin-right: 10px;
 }

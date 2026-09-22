@@ -8,6 +8,8 @@ function UpdatePost() {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
+    const [submitting, setSubmitting] = useState(false)
+
     const navigate = useNavigate()
     
     useEffect(() => {
@@ -23,6 +25,8 @@ function UpdatePost() {
     const handleSubmit = (event) => {
         event.preventDefault()
 
+        setSubmitting(true)
+
         fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
             method: 'PUT',
             body: JSON.stringify({
@@ -37,6 +41,7 @@ function UpdatePost() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
+            setSubmitting(false)
             navigate(`/posts/${id}`)
         })
     }
@@ -58,7 +63,9 @@ function UpdatePost() {
                         value={body}
                         onChange={(event) => setBody(event.target.value)}
                     ></textarea>
-                    <button type="submit" className="update-btn">Update</button>
+                    <button type="submit" className="update-btn" disabled={submitting}>
+                        {submitting ? 'Updating...' : 'Update'}
+                    </button>
                 </form>
         </div>
     );
